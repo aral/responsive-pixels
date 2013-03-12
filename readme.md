@@ -44,10 +44,10 @@ Since we cannot reliably change the root em across browsers, the only thing left
 Using a CSS pre‐processor, we can:
 
 1. Use relative units
-2. That have pixel parity (thus require no maths)
-3. And have pixel fallbacks for older browsers
+2. Have pixel parity (no need for complicated maths)
+3. Have pixel fallbacks for older browsers
 
-Nirvana!
+Ah, CSS nirvana!
 
 So pixel‐parity rems are rems where 1 rem = 1 pixel. They behave as if you set the root em to 1px without actually doing that by using CSS preprocessor mixins to automatically devide the values you pass by 16 (the default root em).
 
