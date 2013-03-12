@@ -1,0 +1,56 @@
+Pixel‐parity rems
+===
+
+‘Because web development shouldn’t require a calculator.’
+
+Why do we need a new unit?
+---
+
+Pixels are easy to work with but have two major drawbacks:
+
+1. They are absolute values (and hence may require lots of redeclaration in breakpoints of responsive designs)
+2. They do not scale properly in older browsers.
+
+Because of this, the web development community has embraced ems. Ems have advantages because they are:
+
+1. Relative units and hence it is easy to scale properties of child elements in proportion by changing a property of their parent element.
+2. They scale properly in older browsers.
+
+However, ems are a pain in the posterior to work with because they are set relative to the font‐size of the element, which is affected by the cascade. What does that mean? It means that you end up needing a calculator to do basic design. You also lose the ability to visualise the dimensions of things.
+
+Thankfully, rems (root ems) make things much easier by basing their values off of the font‐size of the root HTML element. They are:
+
+1. Relative units
+2. They are easy to use
+
+However, they are not supported on older browsers. Which is why, you should provide pixel fallbacks when you are using them.
+
+Also, since the base font size is 16px by default in browsers, you still have to do some math. That’s not ideal.
+
+Enter pixel‐parity rems
+---
+
+Think about it: what would happen if you set the root font size to 1px? You’d get parity between rems and pixels. 1 rem = 1 pixel. And you know what that means? No maths! And you can visualise the dimensions of your elements again.
+
+This is exactly what Chris Jacob suggested in [his Elastic Pixels gist](http://jsbin.com/acide4/8). And I started doing just that. And life was good. For a while.
+
+Unfortunately, not all browsers let you set the root font size to 1px. This is a bug, not a feature. On some browsers it erroneously conflicts with the minimum font size setting in the accessibility settings (even if the actual font sizes of your elements are all larger than it). This results in your elements rendering in horrendously large proportions. And some browsers&#8202;—&#8202;especially some console browsers (thank‐you, Anna Debenham, for letting my test with your toys)&#8202;—&#8202;appear to completely ignore any change to the root font size. Gotta love browsers.
+
+CSS preprocessors to the rescue
+---
+
+Since we cannot reliably change the root em across browsers, the only thing left to do is to use a CSS processor to do the maths for us. A big thank‐you to [Laura Kalbag](http://laurakalbag.com) as her work with pixel fallbacks for rems via mixins is what inspired the idea.
+
+Using a CSS pre‐processor, we can:
+
+1. Use relative units
+2. That have pixel parity (thus require no maths)
+3. And have pixel fallbacks for older browsers
+
+Nirvana!
+
+So pixel‐parity rems are rems where 1 rem = 1 pixel. They behave as if you set the root em to 1px without actually doing that by using CSS preprocessor mixins to automatically devide the values you pass by 16 (the default root em).
+
+I was hesitant to publicise this until I had used it in a few real‐world projects in case any issues cropped up but Laura and I have both used the technique in multiple projects now and we’re both confident that it works. It also makes our lives much easier by reducing our cognitive load so we can concentrate on, you know, actually designing and developing sites.
+
+This repository will, in time, contain implementations of pixel‐parity rems in difference CSS preprocessors. For the time being it has the one that I am working on, which is written in [Stylus](http://learnboost.github.com/stylus/). Laura’s been working with pixel‐parity rems in SASS, so an implementation in SASS should be added shortly.

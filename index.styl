@@ -1,0 +1,333 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+// Pixel‐parity Rem Mixins
+//
+// Copyright © 2012-2013 Aral Balkan.
+// Released under the MIT License.
+//
+// Since some horrible browsers (e.g., on *spit* Android) don’t let you change the
+// root font size, and since browsers do not implement the minimum font size accessibility
+// feature intelligently enough, we’re forced to leave the browser default of 16px
+// as the base font size.
+//
+// These mixins do two things: firstly, they allow you to think in pixels but write in rems,
+// doing the calculation (division by 16) for you (and hence the name, ‘pixel‐parity rems’),
+// and, secondly, they automatically add the pixel fallbacks for you so that older
+// browsers will use pixels.
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// This is the default root line height
+baseLineHeight = 24rem
+
+QuarterLineHeight = baseLineHeight/4 rem
+HalfLineHeight = baseLineHeight/2 rem
+ThreeQuartersLineHeight = baseLineHeight*3/4 rem
+OneLineHeight = baseLineHeight rem
+OneAndAHalfLineHeights = baseLineHeight*1.5 rem
+OneAndAQuarterLineHeights = baseLineHeight*1.25 rem
+OneAndThreeQuartersLineHeights = baseLineHeight*1.75 rem
+TwoLineHeights = baseLineHeight*2 rem
+TwoAndAQuarterLineHeights = baseLineHeight*2.25 rem
+TwoAndAHalfLineHeights = baseLineHeight*2.5 rem
+TwoAndThreeQuartersLineHeights = baseLineHeight*2.75 rem
+ThreeLineHeights = baseLineHeight*3 rem
+ThreeAndAQuarterLineHeights = baseLineHeight*3.25 rem
+ThreeAndAHalfLineHeights = baseLineHeight*3.5 rem
+ThreeAndThreeQuartersLineHeights = baseLineHeight*3.75 rem
+FourLineHeights = baseLineHeight*4 rem
+FiveLineHeights = baseLineHeight*5 rem
+
+calculateLineHeightConstants()
+	QuarterLineHeight = baseLineHeight/4 rem
+	HalfLineHeight = baseLineHeight/2 rem
+	ThreeQuartersLineHeight = baseLineHeight*3/4 rem
+	OneLineHeight = baseLineHeight rem
+	OneAndAHalfLineHeights = baseLineHeight*1.5 rem
+	OneAndAQuarterLineHeights = baseLineHeight*1.25 rem
+	OneAndThreeQuartersLineHeights = baseLineHeight*1.75 rem
+	TwoLineHeights = baseLineHeight*2 rem
+	TwoAndAQuarterLineHeights = baseLineHeight*2.25 rem
+	TwoAndAHalfLineHeights = baseLineHeight*2.5 rem
+	TwoAndThreeQuartersLineHeights = baseLineHeight*2.75 rem
+	ThreeLineHeights = baseLineHeight*3 rem
+	ThreeAndAQuarterLineHeights = baseLineHeight*3.25 rem
+	ThreeAndAHalfLineHeights = baseLineHeight*3.5 rem
+	ThreeAndThreeQuartersLineHeights = baseLineHeight*3.75 rem
+	FourLineHeights = baseLineHeight*4 rem
+	FiveLineHeights = baseLineHeight*5 rem
+
+//
+// Displays a baseline grid (optionally with a horizontal grid also set to the base line height)
+// Issue: Not all grid lines appear to draw correctly in Firefox or Opera (they work in Safari).
+//
+showBaselineGrid(show = yes, baseFontSize = 16, showQuarterLineHeightMarks=no, showHorizontalGrid=no, majorLineColor=hsl(220, 50%, 70%), minorLineColor=hsl(220, 25%, 85%), quarterMarkLineColor=hsl(220, 5%, 95%), horizontalGridColor=hsl(360, 25%, 85%))
+
+	if show == yes
+
+		if showHorizontalGrid == no
+			//
+			// Just show the vertical baseline grid.
+			//
+			if showQuarterLineHeightMarks == no
+				//
+				// Show line-height and half-line-height marks.
+				//
+				background-image -webkit-linear-gradient(majorLineColor 1px, transparent 1px), -webkit-linear-gradient(minorLineColor 1px, transparent 1px)
+				background-image -moz-linear-gradient(majorLineColor 1px, transparent 1px), -moz-linear-gradient(minorLineColor 1px, transparent 1px)
+				background-image -o-linear-gradient(majorLineColor 1px, transparent 1px), -o-linear-gradient(minorLineColor 1px, transparent 1px)
+				background-image linear-gradient(majorLineColor 1px, transparent 1px), linear-gradient(minorLineColor 1px, transparent 1px)
+
+				// Also allow for a different baseFontSize to be passed in (mostly used to
+				// demonstrate that vertical rhythm is maintained when scaling).
+				baseLineHeightInPixels = (baseLineHeight*baseFontSize/16);
+
+				background-size 100% unit(baseLineHeightInPixels, px), 100% unit(baseLineHeightInPixels/2, px)
+			else
+				//
+				// Show line-height, half-line-height, and quarter-line-height marks.
+				//
+				background-image -webkit-linear-gradient(majorLineColor 1px, transparent 1px), -webkit-linear-gradient(minorLineColor 1px, transparent 1px), -webkit-linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+				background-image -moz-linear-gradient(majorLineColor 1px, transparent 1px), -moz-linear-gradient(minorLineColor 1px, transparent 1px), -moz-linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+				background-image -o-linear-gradient(majorLineColor 1px, transparent 1px), -o-linear-gradient(minorLineColor 1px, transparent 1px), -o-linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+				background-image linear-gradient(majorLineColor 1px, transparent 1px), linear-gradient(minorLineColor 1px, transparent 1px), linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+
+				// Also allow for a different baseFontSize to be passed in (mostly used to
+				// demonstrate that vertical rhythm is maintained when scaling).
+				baseLineHeightInPixels = (baseLineHeight*baseFontSize/16);
+
+				background-size 100% unit(baseLineHeightInPixels, px), 100% unit(baseLineHeightInPixels/2, px), 100% unit(baseLineHeightInPixels/4, px)
+		else
+			//
+			// Show horizontal grid lines too.
+			//
+			if showQuarterLineHeightMarks == "no"
+				//
+				// Show horizontal grid, line-height, half-line-height marks.
+				//
+				background-image -webkit-linear-gradient(majorLineColor 1px, transparent 1px), -webkit-linear-gradient(minorLineColor 1px, transparent 1px)
+				background-image -moz-linear-gradient(majorLineColor 1px, transparent 1px), -moz-linear-gradient(minorLineColor 1px, transparent 1px)
+				background-image -o-linear-gradient(majorLineColor 1px, transparent 1px), -o-linear-gradient(minorLineColor 1px, transparent 1px)
+				background-image linear-gradient(majorLineColor 1px, transparent 1px), linear-gradient(minorLineColor 1px, transparent 1px)
+
+				// Also allow for a different baseFontSize to be passed in (mostly used to
+				// demonstrate that vertical rhythm is maintained when scaling).
+				baseLineHeightInPixels = (baseLineHeight*baseFontSize/16);
+
+				background-size 100% unit(baseLineHeightInPixels, px), 100% unit(baseLineHeightInPixels/2, px)
+			else
+				//
+				// Show horizontal-grid, line-height, half-line-height, and quarter-line-height marks.
+				//
+				background-image -webkit-linear-gradient(left, horizontalGridColor 1px, transparent 1px), -webkit-linear-gradient(majorLineColor 1px, transparent 1px), -webkit-linear-gradient(minorLineColor 1px, transparent 1px), -webkit-linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+				background-image -moz-linear-gradient(majorLineColor 1px, transparent 1px), -moz-linear-gradient(minorLineColor 1px, transparent 1px), -moz-linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+				background-image -o-linear-gradient(majorLineColor 1px, transparent 1px), -o-linear-gradient(minorLineColor 1px, transparent 1px), -o-linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+				background-image linear-gradient(majorLineColor 1px, transparent 1px), linear-gradient(minorLineColor 1px, transparent 1px), linear-gradient(quarterMarkLineColor 1px, transparent 1px)
+
+				// Also allow for a different baseFontSize to be passed in (mostly used to
+				// demonstrate that vertical rhythm is maintained when scaling).
+				baseLineHeightInPixels = (baseLineHeight*baseFontSize/16);
+
+				background-size unit(baseLineHeightInPixels, px) 100%, 100% unit(baseLineHeightInPixels, px), 100% unit(baseLineHeightInPixels/2, px), 100% unit(baseLineHeightInPixels/4, px)
+
+		// In all cases, turn on background repeat in case developer turned it off in HTML
+		// for her own custom background.
+		background-repeat repeat
+
+
+//
+// Requires a variable called rootLineHeight to be set in your styles. If
+// there isn’t one, defaults to 24px. The return value is in pixel‐parity rems
+// (so divided by the default root font size of 16).
+//
+relative-line-height(h)
+	if unit(h) == "rlh"
+		relativeLineHeight = baseLineHeight * h / 16;
+		line-height unit(relativeLineHeight, 'rem')
+
+//
+// CSS overrides
+//
+
+line-height(h)
+	if unit(h) == "rem"
+		line-height unit(h, 'px')
+		line-height unit(h/16, 'rem')
+	else
+		line-height unit(h, unit(h))
+
+
+/* Margin */
+
+margin()
+	if unit(arguments[0]) == "rem"
+
+		t = arguments[0]
+		r = arguments[1]
+		b = arguments[2]
+		l = arguments[3]
+
+		if l
+			margin unit(t, 'px') unit(r, 'px') unit(b, 'px') unit(l, 'px')
+			margin unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem') unit(l/16, 'rem')
+		else if b
+			margin unit(t, 'px') unit(r, 'px') unit(b, 'px')
+			margin unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem')
+		else if r
+			margin unit(t, 'px') unit(r, 'px')
+			margin unit(t/16, 'rem') unit(r/16, 'rem')
+		else if t
+			margin unit(t, 'px')
+			margin unit(t/16, 'rem')
+	else
+		margin arguments
+
+margin-left(l)
+	if l == auto
+		margin-left l
+	else if unit(l) == "rem" or unit(l) == ""
+		margin-left: unit(l, 'px')
+		margin-left: unit(l/16, 'rem')
+	else
+		margin-left: unit(l, unit(l))
+
+margin-right(r)
+	if r == auto
+		margin-right r
+	else
+		margin-right: unit(r, 'px')
+		margin-right: unit(r/16, 'rem')
+
+margin-top(t)
+	if t == auto
+		margin-top t
+	else
+		margin-top: unit(t, 'px')
+		margin-top: unit(t/16, 'rem')
+
+margin-bottom(b)
+	if b == auto
+		margin-bottom b
+	else
+		margin-bottom: unit(b, 'px')
+		margin-bottom: unit(b/16, 'rem')
+
+/* Padding */
+
+padding(t, r, b, l)
+	padding: unit(t, 'px') unit(r, 'px') unit(b, 'px') unit(l, 'px')
+	padding: unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem') unit(l/16, 'rem')
+
+padding-left(l)
+	padding-left: unit(l, 'px')
+	padding-left: unit(l/16, 'rem')
+
+padding-right(r)
+	padding-right: unit(r, 'px')
+	padding-right: unit(r/16, 'rem')
+
+padding-top(t)
+	padding-top: unit(t, 'px')
+	padding-top: unit(t/16, 'rem')
+
+padding-bottom(b)
+	padding-bottom: unit(b, 'px')
+	padding-bottom: unit(b/16, 'rem')
+
+font-size(s)
+	if unit(s) == "rem"
+		font-size: unit(s, 'px')
+		font-size: unit(s/16, 'rem')
+	else
+		font-size: unit(s, unit(s))
+
+max-width(w)
+	if unit(w) == "rem" or unit(w) == ""
+		max-width: unit(w, 'px')
+		max-width: unit(w/16, 'rem')
+	else
+		max-width: unit(w, unit(w))
+
+/* Border */
+
+abstract-border(borderType, borderArgs, originalArguments)
+	value = borderArgs[0];
+
+	// Only  'none'
+	if typeof(value) is "unit"
+
+		style = borderArgs[1];
+		color = borderArgs[2];
+
+		if unit(value) == "rem"
+			{borderType} unit(value, 'px') style color
+			{borderType} unit(value/16, 'rem') style color
+		else
+			{borderType} value style color
+	else
+		{borderType} originalArguments
+
+border(args...)
+	abstract-border("border", args, arguments)
+
+border-top(args...)
+	abstract-border("border-top", args, arguments)
+
+border-right(args...)
+	abstract-border("border-right", args, arguments)
+
+border-bottom(args...)
+	abstract-border("border-bottom", args, arguments)
+
+border-left(args...)
+	abstract-border("border-left", args, arguments)
+
+border-radius(r)
+	border-radius: unit(r, 'px')
+	border-radius: unit(r/16, 'rem')
+
+width(w)
+	if unit(w) == "rem" or unit(w) == ""
+		width: unit(w, 'px')
+		width: unit(w/16, 'rem')
+	else
+		width: unit(w, unit(w))
+
+/* Relative and absolute positioning */
+
+abstractPosition(positionType, value)
+	if unit(value) == "rem"
+		{positionType} unit(value, 'px')
+		{positionType} unit(value/16, 'rem')
+	else
+		{positionType} value
+
+top(value)
+	abstractPosition("top", value)
+
+bottom(value)
+	abstractPosition("bottom", value)
+
+left(value)
+	abstractPosition("left", value)
+
+right(value)
+	abstractPosition("right", value)
+
+//
+// Typography
+//
+
+useJustifiedText()
+	text-align justify
+	hyphens(auto)
+
+hyphens(value)
+	-webkit-hyphens value
+	-moz-hyphens value
+	-o-hyphens value
+	hyphens value
+
+
+
+
