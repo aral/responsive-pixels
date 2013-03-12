@@ -39,7 +39,7 @@ Unfortunately, not all browsers let you set the root font size to 1px. This is a
 CSS preprocessors to the rescue
 ---
 
-Since we cannot reliably change the root em across browsers, the only thing left to do is to use a CSS processor to do the maths for us. A big thank‐you to [Laura Kalbag](http://laurakalbag.com) as her work with pixel fallbacks for rems via mixins is what inspired the idea.
+Since we cannot reliably change the root em across browsers, the only thing left to do is to use a CSS processor to do the maths for us. A big thank‐you to [Laura Kalbag](http://laurakalbag.com) as her work with pixel fallbacks for rems via mixins is what inspired the idea and we’ve been playing with pixel‐parity rems together ever since.
 
 Using a CSS pre‐processor, we can:
 
