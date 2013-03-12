@@ -34,7 +34,7 @@ Think about it: what would happen if you set the root font size to 1px? You’d 
 
 This is exactly what Chris Jacob suggested in [his Elastic Pixels gist](http://jsbin.com/acide4/8). And I started doing just that. And life was good. For a while.
 
-Unfortunately, not all browsers let you set the root font size to 1px. This is a bug, not a feature. On some browsers it erroneously conflicts with the minimum font size setting in the accessibility settings (even if the actual font sizes of your elements are all larger than it). This results in your elements rendering in horrendously large proportions. And some browsers&#8202;—&#8202;especially some console browsers (thank‐you, Anna Debenham, for letting my test with your toys)&#8202;—&#8202;appear to completely ignore any change to the root font size. Gotta love browsers.
+Unfortunately, not all browsers let you set the root font size to 1px. This is a bug, not a feature. On some browsers it erroneously conflicts with the minimum font size setting in the accessibility settings (even if the actual font sizes of your elements are all larger than it). This results in your elements rendering in horrendously large proportions. And some browsers&#8202;—&#8202;especially some console browsers (thank‐you, [Anna Debenham](http://maban.co.uk), for letting my test with your toys)&#8202;—&#8202;appear to completely ignore any change to the root font size. Gotta love browsers.
 
 CSS preprocessors to the rescue
 ---
