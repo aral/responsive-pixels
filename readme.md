@@ -11,17 +11,17 @@ Pixels are easy to work with but have two major drawbacks:
 1. They are absolute values (and hence may require lots of redeclaration in breakpoints of responsive designs)
 2. They do not scale properly in older browsers.
 
-Because of this, the web development community has embraced ems. Ems have advantages because they are:
+Because of this, the web development community has embraced ems. Ems have advantages because they:
 
-1. Relative units and hence it is easy to scale properties of child elements in proportion by changing a property of their parent element.
-2. They scale properly in older browsers.
+1. Are relative units and hence it is easy to scale properties of child elements in proportion by changing a property of their parent element.
+2. Scale properly in older browsers.
 
 However, ems are a pain in the posterior to work with because they are set relative to the font‐size of the element, which is affected by the cascade. What does that mean? It means that you end up needing a calculator to do basic design. You also lose the ability to visualise the dimensions of things.
 
 Thankfully, rems (root ems) make things much easier by basing their values off of the font‐size of the root HTML element. They are:
 
 1. Relative units
-2. They are easy to use
+2. Easy to use
 
 However, they are not supported on older browsers. Which is why, you should provide pixel fallbacks when you are using them.
 
