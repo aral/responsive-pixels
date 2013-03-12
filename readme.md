@@ -49,7 +49,7 @@ Using a CSS pre‐processor, we can:
 
 Ah, CSS nirvana!
 
-So pixel‐parity rems are rems where 1 rem = 1 pixel. They behave as if you set the root em to 1px without actually doing that by using CSS preprocessor mixins to automatically devide the values you pass by 16 (the default root em).
+So pixel‐parity rems are rems where 1 rem = 1 pixel. They behave as if you set the root em to 1px without actually doing that by using CSS preprocessor mixins to automatically divide the values you pass by 16 (the default root em).
 
 I was hesitant to publicise this until I had used it in a few real‐world projects in case any issues cropped up but Laura and I have both used the technique in multiple projects now and we’re both confident that it works. It also makes our lives much easier by reducing our cognitive load so we can concentrate on, you know, actually designing and developing sites.
 
