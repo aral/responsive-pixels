@@ -1,13 +1,38 @@
 @import index
 
+// Page styles and defaults to test the inherit setting.
+
 body
 	border 1px solid black
+	width 1000px
+	margin 24px
+	padding 48px
+	line-height 24px
+	font-size: 18px
 
 div
+	width 500px
+	margin 24px 0
 	background-color #eee
-	width 50%
+
+h1
+	font-size 48px
+	line-height 72px
+
+h2
+	font-size 24px
+	line-height 36px
+	margin-top 36px
+	margin-bottom 24px
+	border-bottom 1px solid black
+
 
 // Margins
+
+// Set a margin to be inherited for the test-margin-inherit test
+#test-margin-inherit-parent-element
+	margin 42px
+	border 1px dashed
 
 #test-margin-inherit
 	margin inherit
@@ -72,4 +97,5 @@ div
 	font-size inherit
 
 #test-font-size
-	font-size 30px
+	font-size 42px
+	line-height 63px

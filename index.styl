@@ -155,13 +155,14 @@ line-height(h)
 
 abstract-shorthand(attr, originalArguments)
 
-	if originalArguments[0] == 'inherit'
+	t = originalArguments[0]
+
+	if t == 'inherit' || t == 'auto'
 
 		{attr} originalArguments
 
 	else if unit(originalArguments[0]) == 'px'
 
-		t = originalArguments[0]
 		r = originalArguments[1]
 		b = originalArguments[2]
 		l = originalArguments[3]
@@ -180,7 +181,7 @@ abstract-shorthand(attr, originalArguments)
 			{attr} unit(t/16, 'rem')
 	else
 		{attr} originalArguments
-	
+
 /* Abstract longhand for attributes that take a single value */
 
 abstract-longhand(attr, originalArguments)

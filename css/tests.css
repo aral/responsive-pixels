@@ -1,10 +1,47 @@
 body {
   border: 1px solid #000;
   border: 0.0625rem solid #000;
+  width: 1000px;
+  width: 62.5rem;
+  margin: 24px;
+  margin: 1.5rem;
+  padding: 48px;
+  padding: 3rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  font-size: 18px;
+  font-size: 1.125rem;
 }
 div {
+  width: 500px;
+  width: 31.25rem;
+  margin: 24px;
+  margin: 1.5rem;
   background-color: #eee;
-  width: 'width' 50%;
+}
+h1 {
+  font-size: 48px;
+  font-size: 3rem;
+  line-height: 72px;
+  line-height: 4.5rem;
+}
+h2 {
+  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 36px;
+  line-height: 2.25rem;
+  margin-top: 36px;
+  margin-top: 2.25rem;
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #000;
+  border-bottom: 0.0625rem solid #000;
+}
+#test-margin-inherit-parent-element {
+  margin: 42px;
+  margin: 2.625rem;
+  border: 1px dashed;
+  border: 0.0625rem dashed;
 }
 #test-margin-inherit {
   margin: inherit;
@@ -80,6 +117,8 @@ div {
   font-size: 'font-size' inherit;
 }
 #test-font-size {
-  font-size: 30px;
-  font-size: 1.875rem;
+  font-size: 42px;
+  font-size: 2.625rem;
+  line-height: 63px;
+  line-height: 3.9375rem;
 }

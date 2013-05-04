@@ -2,18 +2,20 @@
 <html lang='en'>
 <head>
 	<title>Responsive Pixels Test Suite</title>
+	<link rel='stylesheet' href='css/reset.css'>
 	<link rel='stylesheet' href='css/tests.css'>
 </head>
 <body>
-	<h1>Tests</h1>
-	<section>
+	<h1>Responsive Pixels Test Suite</h1>
+	<section id='abc'>
 		<h2>Margin</h2>
 
 		<!-- Centering / non-pixel value -->
 
-		<div id='test-margin-inherit'><code>margin inherit</code></div>
+		<div id='test-margin-inherit-parent-element'><div id='test-margin-inherit' data-assert='margin: 42px'><code>margin inherit</code></div></div>
 
-		<div id='test-margin-horizontal-centering'><code>margin 0 auto</code></div>
+		<!-- Body is 1000px wide. Divs are 500px wide. When centered, left & right margins should be equal to 250px -->
+		<div id='test-margin-horizontal-centering' data-assert='margin-left: 250px; margin-right: 250px'><code>margin 0 auto</code></div>
 
 		<!-- Shorthand -->
 
@@ -21,19 +23,19 @@
 
 		<div id='test-margin-two-arguments' data-assert='margin-top: 10px; margin-right: 20px; margin-bottom: 10px; margin-right: 20px'><code>margin 10px 20px</code></div>
 
-		<div id='test-margin-three-arguments'><code>margin 10px 20px 30px</code></div>
+		<div id='test-margin-three-arguments' data-assert='margin-top: 10px; margin-right: 20px; margin-bottom: 30px; margin-left: 20px'><code>margin 10px 20px 30px</code></div>
 
-		<div id='test-margin-four-arguments'><code>margin 10px 20px 30px 40px</code></div>
+		<div id='test-margin-four-arguments' data-assert='margin-top: 10px; margin-right: 20px; margin-bottom: 30px; margin-left: 40px'><code>margin 10px 20px 30px 40px</code></div>
 
 		<!-- Longhand -->
 
-		<div id='test-margin-top'><code>margin-top 10px</code></div>
+		<div id='test-margin-top' data-assert='margin-top: 10px'><code>margin-top 10px</code></div>
 
-		<div id='test-margin-right'><code>margin-right 20px</code></div>
+		<div id='test-margin-right' data-assert='margin-right: 20px'><code>margin-right 20px</code></div>
 
-		<div id='test-margin-bottom'><code>margin-bottom 30px</code></div>
+		<div id='test-margin-bottom' data-assert='margin-bottom: 30px'><code>margin-bottom 30px</code></div>
 
-		<div id='test-margin-left'><code>margin-left 40px</code></div>
+		<div id='test-margin-left' data-assert='margin-left: 40px'><code>margin-left 40px</code></div>
 
 	</section>
 	<section>
@@ -41,30 +43,30 @@
 
 		<!-- Shorthand -->
 
-		<div id='test-padding-one-argument'><code>padding 10px</code></div>
+		<div id='test-padding-one-argument' data-assert='padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px'><code>padding 10px</code></div>
 
-		<div id='test-padding-two-arguments'><code>padding 10px 20px</code></div>
+		<div id='test-padding-two-arguments' data-assert='padding-top: 10px; padding-right: 20px; padding-bottom: 10px; padding-left: 20px;'><code>padding 10px 20px</code></div>
 
-		<div id='test-padding-three-arguments'><code>padding 10px 20px 30px</code></div>
+		<div id='test-padding-three-arguments' data-assert='padding-top: 10px; padding-right: 20px; padding-bottom: 30px; padding-left: 20px'><code>padding 10px 20px 30px</code></div>
 
-		<div id='test-padding-four-arguments'><code>padding 10px 20px 30px 40px</code></div>
+		<div id='test-padding-four-arguments' data-assert='padding-top: 10px; padding-right: 20px; padding-bottom: 30px; padding-left: 40px'><code>padding 10px 20px 30px 40px</code></div>
 
 		<!-- Longhand -->
 
-		<div id='test-padding-top'><code>padding-top 10px</code></div>
+		<div id='test-padding-top' data-assert='padding-top: 10px'><code>padding-top 10px</code></div>
 
-		<div id='test-padding-right'><code>padding-right 20px</code></div>
+		<div id='test-padding-right' data-assert='padding-right: 20px'><code>padding-right 20px</code></div>
 
-		<div id='test-padding-bottom'><code>padding-bottom 30px</code></div>
+		<div id='test-padding-bottom' data-assert='padding-bottom: 30px'><code>padding-bottom 30px</code></div>
 
-		<div id='test-padding-left'><code>padding-left 40px</code></div>
+		<div id='test-padding-left' data-assert='padding-left: 40px'><code>padding-left 40px</code></div>
 	</section>
 	<section>
 		<h2>Font size</h2>
 
-		<div id='test-font-size-inherit'><code>font-size inherit</code></div>
+		<div id='test-font-size-inherit' data-assert='font-size: 18px'><code>font-size inherit</code></div>
 
-		<div id='test-font-size'><code>font-size 30px</code></div>
+		<div id='test-font-size' data-assert='font-size: 42px'><code>font-size 42px</code></div>
 	</section>
 	<script src='dom-style-test-runner.js'></script>
 
