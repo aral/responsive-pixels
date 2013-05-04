@@ -1,19 +1,13 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-// Pixel‐parity rem mixins for Stylus.
+// Responsive Pixels mixins for Stylus.
+//
+// ‘Because web design should not require a calculator.’
 //
 // Copyright © 2012-2013 Aral Balkan.
 // Released under the MIT License.
 //
-// Since some horrible browsers (e.g., on *spit* Android) don’t let you change the
-// root font size, and since browsers do not implement the minimum font size accessibility
-// feature intelligently enough, we’re forced to leave the browser default of 16px
-// as the base font size.
-//
-// These mixins do two things: firstly, they allow you to think in pixels but write in rems,
-// doing the calculation (division by 16) for you (and hence the name, ‘pixel‐parity rems’),
-// and, secondly, they automatically add the pixel fallbacks for you so that older
-// browsers will use pixels.
+// Think in pixels; have them automatically translated to rems.
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -101,7 +95,7 @@ showBaselineGrid(show = yes, baseFontSize = 16, showQuarterLineHeightMarks=no, s
 			//
 			// Show horizontal grid lines too.
 			//
-			if showQuarterLineHeightMarks == "no"
+			if showQuarterLineHeightMarks == 'no'
 				//
 				// Show horizontal grid, line-height, half-line-height marks.
 				//
@@ -141,7 +135,7 @@ showBaselineGrid(show = yes, baseFontSize = 16, showQuarterLineHeightMarks=no, s
 // (so divided by the default root font size of 16).
 //
 relative-line-height(h)
-	if unit(h) == "rlh"
+	if unit(h) == 'rlh'
 		relativeLineHeight = baseLineHeight * h / 16;
 		line-height unit(relativeLineHeight, 'rem')
 
@@ -150,103 +144,102 @@ relative-line-height(h)
 //
 
 line-height(h)
-	if unit(h) == "rem"
+	if unit(h) == 'px'
 		line-height unit(h, 'px')
 		line-height unit(h/16, 'rem')
 	else
 		line-height unit(h, unit(h))
 
+/* Abstract shorthand for attributes that can have 1-4 arguments
+   (top, right, left, bottom) */
+
+abstract-shorthand(attr, originalArguments)
+
+	if originalArguments[0] == 'inherit'
+
+		{attr} originalArguments
+
+	else if unit(originalArguments[0]) == 'px'
+
+		t = originalArguments[0]
+		r = originalArguments[1]
+		b = originalArguments[2]
+		l = originalArguments[3]
+
+		if l
+			{attr} unit(t, 'px') unit(r, 'px') unit(b, 'px') unit(l, 'px')
+			{attr} unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem') unit(l/16, 'rem')
+		else if b
+			{attr} unit(t, 'px') unit(r, 'px') unit(b, 'px')
+			{attr} unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem')
+		else if r
+			{attr} unit(t, 'px') unit(r, 'px')
+			{attr} unit(t/16, 'rem') unit(r/16, 'rem')
+		else if t
+			{attr} unit(t, 'px')
+			{attr} unit(t/16, 'rem')
+	else
+		{attr} originalArguments
+	
+/* Abstract longhand for attributes that take a single value */
+
+abstract-longhand(attr, originalArguments)
+	value = originalArguments[0]
+	if value == 'inherit'
+		{attr} arguments
+	else if unit(value) == 'px'
+		{attr} unit(value, 'px')
+		{attr} unit(value/16, 'rem')
+	else
+		{attr} arguments
+
 
 /* Margin */
 
 margin()
-	if unit(arguments[0]) == "rem"
+	abstract-shorthand('margin', arguments)
 
-		t = arguments[0]
-		r = arguments[1]
-		b = arguments[2]
-		l = arguments[3]
+margin-top()
+	abstract-longhand('margin-top', arguments)
 
-		if l
-			margin unit(t, 'px') unit(r, 'px') unit(b, 'px') unit(l, 'px')
-			margin unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem') unit(l/16, 'rem')
-		else if b
-			margin unit(t, 'px') unit(r, 'px') unit(b, 'px')
-			margin unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem')
-		else if r
-			margin unit(t, 'px') unit(r, 'px')
-			margin unit(t/16, 'rem') unit(r/16, 'rem')
-		else if t
-			margin unit(t, 'px')
-			margin unit(t/16, 'rem')
-	else
-		margin arguments
+margin-right()
+	abstract-longhand('margin-right', arguments)
 
-margin-left(l)
-	if l == auto
-		margin-left l
-	else if unit(l) == "rem" or unit(l) == ""
-		margin-left: unit(l, 'px')
-		margin-left: unit(l/16, 'rem')
-	else
-		margin-left: unit(l, unit(l))
+margin-bottom()
+	abstract-longhand('margin-bottom', arguments)
 
-margin-right(r)
-	if r == auto
-		margin-right r
-	else
-		margin-right: unit(r, 'px')
-		margin-right: unit(r/16, 'rem')
-
-margin-top(t)
-	if t == auto
-		margin-top t
-	else
-		margin-top: unit(t, 'px')
-		margin-top: unit(t/16, 'rem')
-
-margin-bottom(b)
-	if b == auto
-		margin-bottom b
-	else
-		margin-bottom: unit(b, 'px')
-		margin-bottom: unit(b/16, 'rem')
+margin-left()
+	abstract-longhand('margin-left', arguments)
 
 /* Padding */
 
-padding(t, r, b, l)
-	padding: unit(t, 'px') unit(r, 'px') unit(b, 'px') unit(l, 'px')
-	padding: unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem') unit(l/16, 'rem')
+padding()
+	abstract-shorthand('padding', arguments)
 
-padding-left(l)
-	padding-left: unit(l, 'px')
-	padding-left: unit(l/16, 'rem')
+padding-top()
+	abstract-longhand('padding-top', arguments)
 
-padding-right(r)
-	padding-right: unit(r, 'px')
-	padding-right: unit(r/16, 'rem')
+padding-right()
+	abstract-longhand('padding-right', arguments)
 
-padding-top(t)
-	padding-top: unit(t, 'px')
-	padding-top: unit(t/16, 'rem')
+padding-bottom()
+	abstract-longhand('padding-bottom', arguments)
 
-padding-bottom(b)
-	padding-bottom: unit(b, 'px')
-	padding-bottom: unit(b/16, 'rem')
+padding-left()
+	abstract-longhand('padding-left', arguments)
 
-font-size(s)
-	if unit(s) == "rem"
-		font-size: unit(s, 'px')
-		font-size: unit(s/16, 'rem')
-	else
-		font-size: unit(s, unit(s))
+/* Font size */
 
-max-width(w)
-	if unit(w) == "rem" or unit(w) == ""
-		max-width: unit(w, 'px')
-		max-width: unit(w/16, 'rem')
-	else
-		max-width: unit(w, unit(w))
+font-size()
+	abstract-longhand('font-size', arguments)
+
+/* Max width */
+
+max-width()
+	abstract-longhand('max-width', arguments)
+
+max-height()
+	abstract-longhand('max-height', arguments)
 
 /* Border */
 
@@ -254,12 +247,12 @@ abstract-border(borderType, borderArgs, originalArguments)
 	value = borderArgs[0];
 
 	// Only  'none'
-	if typeof(value) is "unit"
+	if typeof(value) is 'unit'
 
 		style = borderArgs[1];
 		color = borderArgs[2];
 
-		if unit(value) == "rem"
+		if unit(value) == 'px'
 			{borderType} unit(value, 'px') style color
 			{borderType} unit(value/16, 'rem') style color
 		else
@@ -268,51 +261,42 @@ abstract-border(borderType, borderArgs, originalArguments)
 		{borderType} originalArguments
 
 border(args...)
-	abstract-border("border", args, arguments)
+	abstract-border('border', args, arguments)
 
 border-top(args...)
-	abstract-border("border-top", args, arguments)
+	abstract-border('border-top', args, arguments)
 
 border-right(args...)
-	abstract-border("border-right", args, arguments)
+	abstract-border('border-right', args, arguments)
 
 border-bottom(args...)
-	abstract-border("border-bottom", args, arguments)
+	abstract-border('border-bottom', args, arguments)
 
 border-left(args...)
-	abstract-border("border-left", args, arguments)
+	abstract-border('border-left', args, arguments)
 
-border-radius(r)
-	border-radius: unit(r, 'px')
-	border-radius: unit(r/16, 'rem')
+border-radius()
+	abstract-longhand('border-radius', arguments)
+
+/* Width */
 
 width(w)
-	if unit(w) == "rem" or unit(w) == ""
-		width: unit(w, 'px')
-		width: unit(w/16, 'rem')
-	else
-		width: unit(w, unit(w))
+	abstract-longhand('width', arguments)
 
 /* Relative and absolute positioning */
 
-abstractPosition(positionType, value)
-	if unit(value) == "rem"
-		{positionType} unit(value, 'px')
-		{positionType} unit(value/16, 'rem')
-	else
-		{positionType} value
+top()
+	abstract-longhand('top', arguments)
 
-top(value)
-	abstractPosition("top", value)
+bottom()
+	abstract-longhand('bottom', arguments)
 
-bottom(value)
-	abstractPosition("bottom", value)
+left()
+	abstract-longhand('left', arguments)
 
-left(value)
-	abstractPosition("left", value)
+right()
+	abstract-longhand('right', arguments)
 
-right(value)
-	abstractPosition("right", value)
 
 //
 // Typography
