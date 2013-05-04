@@ -3,7 +3,7 @@ Pixel‐parity rems
 
 ‘Because web development shouldn’t require a calculator.’
 
-***NOTE*** In transition: pixel‐parity rems are becoming Responsive Pixels. Please pardon the dust.
+***NOTE Project in transition: pixel‐parity rems are becoming Responsive Pixels. Please pardon the dust.***
 
 Why do we need a new unit?
 ---
