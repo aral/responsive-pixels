@@ -12,14 +12,14 @@
 		<!-- Centering / non-pixel value -->
 
 		<div id='test-margin-inherit'><code>margin inherit</code></div>
-		
+
 		<div id='test-margin-horizontal-centering'><code>margin 0 auto</code></div>
 
 		<!-- Shorthand -->
 
-		<div id='test-margin-one-argument'><code>margin 10px</code></div>
+		<div id='test-margin-one-argument' data-assert='margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px'><code>margin 10px</code></div>
 
-		<div id='test-margin-two-arguments'><code>margin 10px 20px</code></div>
+		<div id='test-margin-two-arguments' data-assert='margin-top: 10px; margin-right: 20px; margin-bottom: 10px; margin-right: 20px'><code>margin 10px 20px</code></div>
 
 		<div id='test-margin-three-arguments'><code>margin 10px 20px 30px</code></div>
 
@@ -66,5 +66,7 @@
 
 		<div id='test-font-size'><code>font-size 30px</code></div>
 	</section>
+	<script src='dom-style-test-runner.js'></script>
+
 </body>
 </html>
