@@ -150,37 +150,46 @@ line-height(h)
 	else
 		line-height unit(h, unit(h))
 
+/* Convert unit if pixel */
+
+fallbackify(value)
+	if value == 'inherit' || value == 'auto' || value == 0
+		value
+	else if unit(value) == 'px'
+		unit(value, 'px')
+	else
+		unit(value, unit(value))
+
+remify(value)
+	if value == 'inherit' || value == 'auto' || value == 0
+		value
+	else if unit(value) == 'px'
+		unit(value/16, 'rem')
+	else
+		unit(value, unit(value))
+
 /* Abstract shorthand for attributes that can have 1-4 arguments
    (top, right, left, bottom) */
 
 abstract-shorthand(attr, originalArguments)
 
 	t = originalArguments[0]
+	r = originalArguments[1]
+	b = originalArguments[2]
+	l = originalArguments[3]
 
-	if t == 'inherit' || t == 'auto'
-
-		{attr} originalArguments
-
-	else if unit(originalArguments[0]) == 'px'
-
-		r = originalArguments[1]
-		b = originalArguments[2]
-		l = originalArguments[3]
-
-		if l
-			{attr} unit(t, 'px') unit(r, 'px') unit(b, 'px') unit(l, 'px')
-			{attr} unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem') unit(l/16, 'rem')
-		else if b
-			{attr} unit(t, 'px') unit(r, 'px') unit(b, 'px')
-			{attr} unit(t/16, 'rem') unit(r/16, 'rem') unit(b/16, 'rem')
-		else if r
-			{attr} unit(t, 'px') unit(r, 'px')
-			{attr} unit(t/16, 'rem') unit(r/16, 'rem')
-		else if t
-			{attr} unit(t, 'px')
-			{attr} unit(t/16, 'rem')
-	else
-		{attr} originalArguments
+	if l || l == 0
+		{attr} fallbackify(t) fallbackify(r) fallbackify(b) fallbackify(l)
+		{attr} remify(t) remify(r) remify(b) remify(l)
+	else if b || b == 0
+		{attr} fallbackify(t) fallbackify(r) fallbackify(b)
+		{attr} remify(t) remify(r) remify(b)
+	else if r || r == 0
+		{attr} fallbackify(t) fallbackify(r)
+		{attr} remify(t) remify(r)
+	else if t || t == 0
+		{attr} fallbackify(t)
+		{attr} remify(t)
 
 /* Abstract longhand for attributes that take a single value */
 

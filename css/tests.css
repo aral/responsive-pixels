@@ -15,8 +15,8 @@ body {
 div {
   width: 500px;
   width: 31.25rem;
-  margin: 24px;
-  margin: 1.5rem;
+  margin: 24px 0;
+  margin: 1.5rem 0;
   background-color: #eee;
 }
 h1 {
@@ -45,8 +45,10 @@ h2 {
 }
 #test-margin-inherit {
   margin: inherit;
+  margin: inherit;
 }
 #test-margin-horizontal-centering {
+  margin: 0 auto;
   margin: 0 auto;
 }
 #test-margin-one-argument {
@@ -56,6 +58,10 @@ h2 {
 #test-margin-two-arguments {
   margin: 10px 20px;
   margin: 0.625rem 1.25rem;
+}
+#test-margin-two-arguments-with-zero {
+  margin: 10px 0;
+  margin: 0.625rem 0;
 }
 #test-margin-three-arguments {
   margin: 10px 20px 30px;
