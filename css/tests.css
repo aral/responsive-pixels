@@ -128,3 +128,7 @@ h2 {
   width: 3.125rem;
   width: 100%;
 }
+#test-height {
+  height: 50px;
+  height: 3.125rem;
+}
