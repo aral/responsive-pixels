@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 //
 // Responsive Pixels mixins for Stylus.
 //
@@ -9,7 +9,204 @@
 //
 // Think in pixels; have them automatically translated to rems.
 //
-//////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+
+/************************************************************
+ *														 	*
+ * Mixins: Helpers											*
+ *															*
+ ************************************************************/
+
+/* Convert unit to rems if unit is in pixels. */
+
+remify(value)
+	if value == 'inherit' || value == 'auto' || value == 0 || value == null
+		value
+	else if unit(value) == 'px'
+		unit(value/16, 'rem')
+	else
+		unit(value, unit(value))
+
+/* Abstract shorthand for attributes that can have 1-4 arguments
+   (top, right, left, bottom) */
+
+abstract-shorthand(attr, originalArguments)
+
+	t = originalArguments[0]
+	r = originalArguments[1]
+	b = originalArguments[2]
+	l = originalArguments[3]
+
+	rT = remify(t)
+	rR = remify(r)
+	rB = remify(b)
+	rL = remify(l)
+
+	if l || l == 0
+		{attr} t r b l
+		/* Make sure that the rule is written out only once in case there is no rem substitution */
+		if !(t == rT && r == rR && b == rB && l == rL)
+			{attr} rT rR rB rL
+	else if b || b == 0
+		{attr} t r b
+		if !(t == rT && r == rR && b == rB)
+			{attr} rT rR rB
+	else if r || r == 0
+		{attr} t r
+		if !(t == rT && r == rR)
+			{attr} rT rR
+	else if t || t == 0
+		{attr} t
+		if !(t = rT)
+			{attr} rT
+
+/* Abstract longhand for attributes that take a single value */
+
+abstract-longhand(attr, originalArguments)
+	value = originalArguments[0]
+	remifiedValue = remify(value)
+
+	{attr} value
+	if value != remifiedValue
+		{attr} remify(value)
+
+
+/************************************************************
+ *														 	*
+ * Mixins: CSS overrides									*
+ *															*
+ ************************************************************/
+
+
+/* Line height */
+
+line-height()
+	abstract-longhand('line-height', arguments)
+
+/* Margin */
+
+margin()
+	abstract-shorthand('margin', arguments)
+
+margin-top()
+	abstract-longhand('margin-top', arguments)
+
+margin-right()
+	abstract-longhand('margin-right', arguments)
+
+margin-bottom()
+	abstract-longhand('margin-bottom', arguments)
+
+margin-left()
+	abstract-longhand('margin-left', arguments)
+
+/* Padding */
+
+padding()
+	abstract-shorthand('padding', arguments)
+
+padding-top()
+	abstract-longhand('padding-top', arguments)
+
+padding-right()
+	abstract-longhand('padding-right', arguments)
+
+padding-bottom()
+	abstract-longhand('padding-bottom', arguments)
+
+padding-left()
+	abstract-longhand('padding-left', arguments)
+
+/* Font size */
+
+font-size()
+	abstract-longhand('font-size', arguments)
+
+/* Max width */
+
+max-width()
+	abstract-longhand('max-width', arguments)
+
+max-height()
+	abstract-longhand('max-height', arguments)
+
+/* Border */
+
+abstract-border(borderType, borderArgs, originalArguments)
+	value = borderArgs[0];
+
+	// Only  'none'
+	if typeof(value) is 'unit'
+
+		style = borderArgs[1];
+		color = borderArgs[2];
+
+		if unit(value) == 'px'
+			{borderType} unit(value, 'px') style color
+			{borderType} unit(value/16, 'rem') style color
+		else
+			{borderType} value style color
+	else
+		{borderType} originalArguments
+
+border(args...)
+	abstract-border('border', args, arguments)
+
+border-top(args...)
+	abstract-border('border-top', args, arguments)
+
+border-right(args...)
+	abstract-border('border-right', args, arguments)
+
+border-bottom(args...)
+	abstract-border('border-bottom', args, arguments)
+
+border-left(args...)
+	abstract-border('border-left', args, arguments)
+
+border-radius()
+	abstract-longhand('border-radius', arguments)
+
+/* Width */
+
+width(w)
+	abstract-longhand('width', arguments)
+
+/* Relative and absolute positioning */
+
+top()
+	abstract-longhand('top', arguments)
+
+bottom()
+	abstract-longhand('bottom', arguments)
+
+left()
+	abstract-longhand('left', arguments)
+
+right()
+	abstract-longhand('right', arguments)
+
+
+/************************************************************
+ *														 	*
+ * Typography												*
+ *															*
+ ************************************************************/
+
+useJustifiedText()
+	text-align justify
+	hyphens(auto)
+
+hyphens(value)
+	-webkit-hyphens value
+	-moz-hyphens value
+	-o-hyphens value
+	hyphens value
+
+//
+// Helpers (using line height as your unit of scale for vertical/horizontal rhythm.)
+//
 
 // This is the default root line height
 baseLineHeight = 24rem
@@ -138,210 +335,5 @@ relative-line-height(h)
 	if unit(h) == 'rlh'
 		relativeLineHeight = baseLineHeight * h / 16;
 		line-height unit(relativeLineHeight, 'rem')
-
-//
-// CSS overrides
-//
-
-line-height(h)
-	if unit(h) == 'px'
-		line-height unit(h, 'px')
-		line-height unit(h/16, 'rem')
-	else
-		line-height unit(h, unit(h))
-
-/* Convert unit if pixel */
-
-fallbackify(value)
-	if value == 'inherit' || value == 'auto' || value == 0 || value == null
-		value
-	else if unit(value) == 'px'
-		unit(value, 'px')
-	else
-		unit(value, unit(value))
-
-remify(value)
-	if value == 'inherit' || value == 'auto' || value == 0 || value == null
-		value
-	else if unit(value) == 'px'
-		unit(value/16, 'rem')
-	else
-		unit(value, unit(value))
-
-/* Abstract shorthand for attributes that can have 1-4 arguments
-   (top, right, left, bottom) */
-
-abstract-shorthand(attr, originalArguments)
-
-	t = originalArguments[0]
-	r = originalArguments[1]
-	b = originalArguments[2]
-	l = originalArguments[3]
-
-	fT = fallbackify(t)
-	fR = fallbackify(r)
-	fB = fallbackify(b)
-	fL = fallbackify(l)
-
-	rT = remify(t)
-	rR = remify(r)
-	rB = remify(b)
-	rL = remify(l)
-
-	if l || l == 0
-		{attr} fT fR fB fL
-		/* Make sure that the rule is written out only once in case there is no rem substitution */
-		if !(fT == rT && fR == rR && fB == rB && fL == rL)
-			{attr} rT rR rB rL
-	else if b || b == 0
-		{attr} fT fR fB
-		if !(fT == rT && fR == rR && fB == rB)
-			{attr} rT rR rB
-	else if r || r == 0
-		{attr} fT fR
-		if !(fT == rT && fR == rR)
-			{attr} remify(t) remify(r)
-	else if t || t == 0
-		{attr} fT
-		if !(fT = rT)
-			{attr} remify(t)
-
-/* Abstract longhand for attributes that take a single value */
-
-abstract-longhand(attr, originalArguments)
-	value = originalArguments[0]
-
-	fallbackifyValue = fallbackify(value)
-	
-	{attr} fallbackifyValue
-
-	/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
-	/* Make sure that the rule is written out only once in case there is no rem substitution */
-	if fallbackifyValue != 'inherit'
-		if fallbackifyValue != 'auto'
-			if fallbackifyValue != 0
-				if unit(fallbackifyValue) == "px"
-					{attr} remify(value)
-
-
-/* Margin */
-
-margin()
-	abstract-shorthand('margin', arguments)
-
-margin-top()
-	abstract-longhand('margin-top', arguments)
-
-margin-right()
-	abstract-longhand('margin-right', arguments)
-
-margin-bottom()
-	abstract-longhand('margin-bottom', arguments)
-
-margin-left()
-	abstract-longhand('margin-left', arguments)
-
-/* Padding */
-
-padding()
-	abstract-shorthand('padding', arguments)
-
-padding-top()
-	abstract-longhand('padding-top', arguments)
-
-padding-right()
-	abstract-longhand('padding-right', arguments)
-
-padding-bottom()
-	abstract-longhand('padding-bottom', arguments)
-
-padding-left()
-	abstract-longhand('padding-left', arguments)
-
-/* Font size */
-
-font-size()
-	abstract-longhand('font-size', arguments)
-
-/* Max width */
-
-max-width()
-	abstract-longhand('max-width', arguments)
-
-max-height()
-	abstract-longhand('max-height', arguments)
-
-/* Border */
-
-abstract-border(borderType, borderArgs, originalArguments)
-	value = borderArgs[0];
-
-	// Only  'none'
-	if typeof(value) is 'unit'
-
-		style = borderArgs[1];
-		color = borderArgs[2];
-
-		if unit(value) == 'px'
-			{borderType} unit(value, 'px') style color
-			{borderType} unit(value/16, 'rem') style color
-		else
-			{borderType} value style color
-	else
-		{borderType} originalArguments
-
-border(args...)
-	abstract-border('border', args, arguments)
-
-border-top(args...)
-	abstract-border('border-top', args, arguments)
-
-border-right(args...)
-	abstract-border('border-right', args, arguments)
-
-border-bottom(args...)
-	abstract-border('border-bottom', args, arguments)
-
-border-left(args...)
-	abstract-border('border-left', args, arguments)
-
-border-radius()
-	abstract-longhand('border-radius', arguments)
-
-/* Width */
-
-width(w)
-	abstract-longhand('width', arguments)
-
-/* Relative and absolute positioning */
-
-top()
-	abstract-longhand('top', arguments)
-
-bottom()
-	abstract-longhand('bottom', arguments)
-
-left()
-	abstract-longhand('left', arguments)
-
-right()
-	abstract-longhand('right', arguments)
-
-
-//
-// Typography
-//
-
-useJustifiedText()
-	text-align justify
-	hyphens(auto)
-
-hyphens(value)
-	-webkit-hyphens value
-	-moz-hyphens value
-	-o-hyphens value
-	hyphens value
-
-
 
 
