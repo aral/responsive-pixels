@@ -153,7 +153,7 @@ line-height(h)
 /* Convert unit if pixel */
 
 fallbackify(value)
-	if value == 'inherit' || value == 'auto' || value == 0
+	if value == 'inherit' || value == 'auto' || value == 0 || value == null
 		value
 	else if unit(value) == 'px'
 		unit(value, 'px')
@@ -161,7 +161,7 @@ fallbackify(value)
 		unit(value, unit(value))
 
 remify(value)
-	if value == 'inherit' || value == 'auto' || value == 0
+	if value == 'inherit' || value == 'auto' || value == 0 || value == null
 		value
 	else if unit(value) == 'px'
 		unit(value/16, 'rem')
@@ -178,18 +178,33 @@ abstract-shorthand(attr, originalArguments)
 	b = originalArguments[2]
 	l = originalArguments[3]
 
+	fT = fallbackify(t)
+	fR = fallbackify(r)
+	fB = fallbackify(b)
+	fL = fallbackify(l)
+
+	rT = remify(t)
+	rR = remify(r)
+	rB = remify(b)
+	rL = remify(l)
+
 	if l || l == 0
-		{attr} fallbackify(t) fallbackify(r) fallbackify(b) fallbackify(l)
-		{attr} remify(t) remify(r) remify(b) remify(l)
+		{attr} fT fR fB fL
+		/* Make sure that the rule is written out only once in case there is no rem substitution */
+		if !(fT == rT && fR == rR && fB == rB && fL == rL)
+			{attr} rT rR rB rL
 	else if b || b == 0
-		{attr} fallbackify(t) fallbackify(r) fallbackify(b)
-		{attr} remify(t) remify(r) remify(b)
+		{attr} fT fR fB
+		if !(fT == rT && fR == rR && fB == rB)
+			{attr} rT rR rB
 	else if r || r == 0
-		{attr} fallbackify(t) fallbackify(r)
-		{attr} remify(t) remify(r)
+		{attr} fT fR
+		if !(fT == rT && fR == rR)
+			{attr} remify(t) remify(r)
 	else if t || t == 0
-		{attr} fallbackify(t)
-		{attr} remify(t)
+		{attr} fT
+		if !(fT = rT)
+			{attr} remify(t)
 
 /* Abstract longhand for attributes that take a single value */
 
@@ -201,6 +216,7 @@ abstract-longhand(attr, originalArguments)
 	{attr} fallbackifyValue
 
 	/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
+	/* Make sure that the rule is written out only once in case there is no rem substitution */
 	if fallbackifyValue != 'inherit'
 		if fallbackifyValue != 'auto'
 			if fallbackifyValue != 0
