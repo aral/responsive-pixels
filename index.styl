@@ -195,13 +195,17 @@ abstract-shorthand(attr, originalArguments)
 
 abstract-longhand(attr, originalArguments)
 	value = originalArguments[0]
-	if value == 'inherit'
-		{attr} arguments
-	else if unit(value) == 'px'
-		{attr} unit(value, 'px')
-		{attr} unit(value/16, 'rem')
-	else
-		{attr} arguments
+
+	fallbackifyValue = fallbackify(value)
+	
+	{attr} fallbackifyValue
+
+	/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
+	if fallbackifyValue != 'inherit'
+		if fallbackifyValue != 'auto'
+			if fallbackifyValue != 0
+				if unit(fallbackifyValue) == "px"
+					{attr} remify(value)
 
 
 /* Margin */

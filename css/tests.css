@@ -2,6 +2,7 @@ body {
   border: 1px solid #000;
   border: 0.0625rem solid #000;
   width: 1000px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   width: 62.5rem;
   margin: 24px;
   margin: 1.5rem;
@@ -10,10 +11,12 @@ body {
   line-height: 24px;
   line-height: 1.5rem;
   font-size: 18px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   font-size: 1.125rem;
 }
 div {
   width: 500px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   width: 31.25rem;
   margin: 24px 0;
   margin: 1.5rem 0;
@@ -21,18 +24,22 @@ div {
 }
 h1 {
   font-size: 48px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   font-size: 3rem;
   line-height: 72px;
   line-height: 4.5rem;
 }
 h2 {
   font-size: 24px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   font-size: 1.5rem;
   line-height: 36px;
   line-height: 2.25rem;
   margin-top: 36px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   margin-top: 2.25rem;
   margin-bottom: 24px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #000;
   border-bottom: 0.0625rem solid #000;
@@ -73,18 +80,22 @@ h2 {
 }
 #test-margin-top {
   margin-top: 10px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   margin-top: 0.625rem;
 }
 #test-margin-right {
   margin-right: 20px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   margin-right: 1.25rem;
 }
 #test-margin-bottom {
   margin-bottom: 30px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   margin-bottom: 1.875rem;
 }
 #test-margin-left {
   margin-left: 40px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   margin-left: 2.5rem;
 }
 #test-padding-one-argument {
@@ -105,26 +116,39 @@ h2 {
 }
 #test-padding-top {
   padding-top: 10px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   padding-top: 0.625rem;
 }
 #test-padding-right {
   padding-right: 20px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   padding-right: 1.25rem;
 }
 #test-padding-bottom {
   padding-bottom: 30px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   padding-bottom: 1.875rem;
 }
 #test-padding-left {
   padding-left: 40px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   padding-left: 2.5rem;
 }
 #test-font-size-inherit {
-  font-size: 'font-size' inherit;
+  font-size: inherit;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
 }
 #test-font-size {
   font-size: 42px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
   font-size: 2.625rem;
   line-height: 63px;
   line-height: 3.9375rem;
+}
+#test-width-hundred-percent {
+  width: 50px;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
+  width: 3.125rem;
+  width: 100%;
+/* Note: nested if on purpose. Otherwise Stylus runs all conditionals, causing an error (doesn’t break on first false one) */
 }
