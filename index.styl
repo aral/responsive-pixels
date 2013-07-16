@@ -21,7 +21,7 @@
 /* Convert unit to rems if unit is in pixels. */
 
 remify(value)
-	if value == 'inherit' || value == 'auto' || value == 0 || value == null
+	if value == 'inherit' || value == 'auto' || value == 'none' || value == 0 || value == null
 		value
 	else if unit(value) == 'px'
 		unit(value/16, 'rem')

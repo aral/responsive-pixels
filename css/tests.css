@@ -132,3 +132,8 @@ h2 {
   height: 50px;
   height: 3.125rem;
 }
+#test-max-width {
+  max-width: 50px;
+  max-width: 3.125rem;
+  max-width: none;
+}
