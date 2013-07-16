@@ -137,3 +137,7 @@ h2 {
   max-width: 3.125rem;
   max-width: none;
 }
+#test-background-size {
+  background-size: 100px;
+  background-size: 6.25rem;
+}
