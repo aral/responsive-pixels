@@ -139,18 +139,19 @@ max-height()
 
 abstract-border(borderType, borderArgs, originalArguments)
 	value = borderArgs[0];
+	style = borderArgs[1];
+	color = borderArgs[2];
 
 	// Only  'none'
 	if typeof(value) is 'unit'
-
-		style = borderArgs[1];
-		color = borderArgs[2];
-
 		if unit(value) == 'px'
 			{borderType} unit(value, 'px') style color
 			{borderType} unit(value/16, 'rem') style color
 		else
 			{borderType} value style color
+	else if value is 'hairline'
+		// Since we lose the ability to create 1px borders, a little extension.
+		{borderType} unit(1, 'px') style color
 	else
 		{borderType} originalArguments
 
