@@ -3,8 +3,12 @@ body {
   border: 0.0625rem solid #000;
   width: 1000px;
   width: 62.5rem;
-  margin: 24px;
-  padding: 48px;
+  margin: 24px  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
+  margin: 1.5rem;
+  padding: 48px  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
+  padding: 3rem;
   line-height: 24px;
   line-height: 1.5rem;
   font-size: 18px;
@@ -13,7 +17,8 @@ body {
 div {
   width: 500px;
   width: 31.25rem;
-  margin: 24px 0;
+  margin: 24px 0 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   margin: 1.5rem 0;
   background-color: #eee;
 }
@@ -36,35 +41,50 @@ h2 {
   border-bottom: 0.0625rem solid #000;
 }
 #test-margin-inherit-parent-element {
-  margin: 42px;
+  margin: 42px  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
+  margin: 2.625rem;
   border: 1px dashed;
   border: 0.0625rem dashed;
 }
 #test-margin-inherit {
+  margin: inherit  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   margin: inherit;
 }
 #test-margin-horizontal-centering {
+  margin: 0 auto 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   margin: 0 auto;
 }
 #test-margin-one-argument {
-  margin: 10px;
+  margin: 10px  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
+  margin: 0.625rem;
 }
 #test-margin-two-arguments {
-  margin: 10px 20px;
+  margin: 10px 20px 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   margin: 0.625rem 1.25rem;
 }
 #test-margin-two-arguments-with-zero {
-  margin: 10px 0;
+  margin: 10px 0 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   margin: 0.625rem 0;
 }
 #test-margin-three-arguments {
-  margin: 10px 20px 30px;
+  margin: 10px 20px 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   margin: 0.625rem 1.25rem 1.875rem;
 }
 #test-margin-four-arguments {
-  margin: 10px 20px 30px 40px;
+  margin: 10px 20px 1px 1px;
 /* Make sure that the rule is written out only once in case there is no rem substitution */
   margin: 0.625rem 1.25rem 1.875rem 2.5rem;
+}
+#test-margin-four-hairlines {
+  margin: 1px 1px 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
 }
 #test-margin-top {
   margin-top: 10px;
@@ -82,19 +102,27 @@ h2 {
   margin-left: 40px;
   margin-left: 2.5rem;
 }
+#test-margin-hairline {
+  margin-left: 1px;
+  margin-left: '1px';
+}
 #test-padding-one-argument {
-  padding: 10px;
+  padding: 10px  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
+  padding: 0.625rem;
 }
 #test-padding-two-arguments {
-  padding: 10px 20px;
+  padding: 10px 20px 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   padding: 0.625rem 1.25rem;
 }
 #test-padding-three-arguments {
-  padding: 10px 20px 30px;
+  padding: 10px 20px 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   padding: 0.625rem 1.25rem 1.875rem;
 }
 #test-padding-four-arguments {
-  padding: 10px 20px 30px 40px;
+  padding: 10px 20px 1px 1px;
 /* Make sure that the rule is written out only once in case there is no rem substitution */
   padding: 0.625rem 1.25rem 1.875rem 2.5rem;
 }
@@ -139,6 +167,13 @@ h2 {
 }
 #test-background-size {
   background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,0.5) 50%);
-  background-size: 500px 500px;
+  background-size: 500px 500px 1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
   background-size: 31.25rem 31.25rem;
+}
+#test-background-size-cover {
+  background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,0.5) 50%);
+  background-size: cover  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
+  background-size: cover;
 }

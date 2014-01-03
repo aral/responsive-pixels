@@ -23,6 +23,8 @@
 remify(value)
 	if value == 'inherit' || value == 'auto' || value == 'none' || value == 'cover' || value == 'smaller' || value == 0 || value == null
 		value
+	else if value == 'hairline'
+		'1px'
 	else if unit(value) == 'px'
 		unit(value/16, 'rem')
 	else
@@ -42,6 +44,15 @@ abstract-shorthand(attr, originalArguments)
 	rR = remify(r)
 	rB = remify(b)
 	rL = remify(l)
+
+	if t == 'hairline'
+		t = 1px
+	if r == 'hairline'
+		r = 1px
+	if b = 'hairline'
+		b = 1px
+	if l = 'hairline'
+		l = 1px
 
 	if l || l == 0
 		{attr} t r b l
@@ -67,7 +78,11 @@ abstract-longhand(attr, originalArguments)
 	value = originalArguments[0]
 	remifiedValue = remify(value)
 
-	{attr} value
+	if value == 'hairline'
+		{attr} 1px
+	else
+		{attr} value
+	
 	if value != remifiedValue
 		{attr} remify(value)
 
@@ -219,44 +234,45 @@ hyphens(value)
 //
 
 // This is the default root line height
-baseLineHeight = 24rem
+baseLineHeight = 24
 
-QuarterLineHeight = baseLineHeight/4 rem
-HalfLineHeight = baseLineHeight/2 rem
-ThreeQuartersLineHeight = baseLineHeight*3/4 rem
-OneLineHeight = baseLineHeight rem
-OneAndAHalfLineHeights = baseLineHeight*1.5 rem
-OneAndAQuarterLineHeights = baseLineHeight*1.25 rem
-OneAndThreeQuartersLineHeights = baseLineHeight*1.75 rem
-TwoLineHeights = baseLineHeight*2 rem
-TwoAndAQuarterLineHeights = baseLineHeight*2.25 rem
-TwoAndAHalfLineHeights = baseLineHeight*2.5 rem
-TwoAndThreeQuartersLineHeights = baseLineHeight*2.75 rem
-ThreeLineHeights = baseLineHeight*3 rem
-ThreeAndAQuarterLineHeights = baseLineHeight*3.25 rem
-ThreeAndAHalfLineHeights = baseLineHeight*3.5 rem
-ThreeAndThreeQuartersLineHeights = baseLineHeight*3.75 rem
-FourLineHeights = baseLineHeight*4 rem
-FiveLineHeights = baseLineHeight*5 rem
+QuarterLineHeight = baseLineHeight/4 px
+HalfLineHeight = baseLineHeight/2 px
+ThreeQuartersLineHeight = baseLineHeight*3/4 px
+OneLineHeight = baseLineHeight px
+OneAndAHalfLineHeights = baseLineHeight*1.5 px
+OneAndAQuarterLineHeights = baseLineHeight*1.25 px
+OneAndThreeQuartersLineHeights = baseLineHeight*1.75 px
+TwoLineHeights = baseLineHeight*2 px
+TwoAndAQuarterLineHeights = baseLineHeight*2.25 px
+TwoAndAHalfLineHeights = baseLineHeight*2.5 px
+TwoAndThreeQuartersLineHeights = baseLineHeight*2.75 px
+ThreeLineHeights = baseLineHeight*3 px
+ThreeAndAQuarterLineHeights = baseLineHeight*3.25 px
+ThreeAndAHalfLineHeights = baseLineHeight*3.5 px
+ThreeAndThreeQuartersLineHeights = baseLineHeight*3.75 px
+FourLineHeights = baseLineHeight*4 px
+FiveLineHeights = baseLineHeight*5 px
 
 calculateLineHeightConstants()
-	QuarterLineHeight = baseLineHeight/4 rem
-	HalfLineHeight = baseLineHeight/2 rem
-	ThreeQuartersLineHeight = baseLineHeight*3/4 rem
-	OneLineHeight = baseLineHeight rem
-	OneAndAHalfLineHeights = baseLineHeight*1.5 rem
-	OneAndAQuarterLineHeights = baseLineHeight*1.25 rem
-	OneAndThreeQuartersLineHeights = baseLineHeight*1.75 rem
-	TwoLineHeights = baseLineHeight*2 rem
-	TwoAndAQuarterLineHeights = baseLineHeight*2.25 rem
-	TwoAndAHalfLineHeights = baseLineHeight*2.5 rem
-	TwoAndThreeQuartersLineHeights = baseLineHeight*2.75 rem
-	ThreeLineHeights = baseLineHeight*3 rem
-	ThreeAndAQuarterLineHeights = baseLineHeight*3.25 rem
-	ThreeAndAHalfLineHeights = baseLineHeight*3.5 rem
-	ThreeAndThreeQuartersLineHeights = baseLineHeight*3.75 rem
-	FourLineHeights = baseLineHeight*4 rem
-	FiveLineHeights = baseLineHeight*5 rem
+	QuarterLineHeight = baseLineHeight/4 px
+	HalfLineHeight = baseLineHeight/2 px
+	ThreeQuartersLineHeight = baseLineHeight*3/4 px
+	OneLineHeight = baseLineHeight px
+	OneAndAHalfLineHeights = baseLineHeight*1.5 px
+	OneAndAQuarterLineHeights = baseLineHeight*1.25 px
+	OneAndThreeQuartersLineHeights = baseLineHeight*1.75 px
+	TwoLineHeights = baseLineHeight*2 px
+	TwoAndAQuarterLineHeights = baseLineHeight*2.25 px
+	TwoAndAHalfLineHeights = baseLineHeight*2.5 px
+	TwoAndThreeQuartersLineHeights = baseLineHeight*2.75 px
+	ThreeLineHeights = baseLineHeight*3 px
+	ThreeAndAQuarterLineHeights = baseLineHeight*3.25 px
+	ThreeAndAHalfLineHeights = baseLineHeight*3.5 px
+	ThreeAndThreeQuartersLineHeights = baseLineHeight*3.75 px
+	FourLineHeights = baseLineHeight*4 px
+	FiveLineHeights = baseLineHeight*5 px
+
 
 //
 // Displays a baseline grid (optionally with a horizontal grid also set to the base line height)
