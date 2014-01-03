@@ -174,4 +174,6 @@ h2 {
 #test-background-size-cover {
   background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,0.5) 50%);
   background-size: cover  1px 1px;
+/* Make sure that the rule is written out only once in case there is no rem substitution */
+  background-size: cover;
 }
